@@ -4,22 +4,29 @@ import { getData } from "./services/movieservice";
 let movies: IMovie[] = [];
 
 export const init = () => {
+  //Hittar form elementet
   let form = document.getElementById("searchForm") as HTMLFormElement;
+  //Lägger till eventlistener submit 
   form.addEventListener("submit", (e: SubmitEvent) => {
+    //prevent att submit återställer sidan
     e.preventDefault();
-    handleSubmit();
+    //anropar handleSubmit
+    exports.handleSubmit();
   });
 };
 
 export async function handleSubmit() {
+  //Hämtar input value för att söka
   let searchText = (document.getElementById("searchText") as HTMLInputElement)
     .value;
 
+    //Hämtar div och sätter sedan till ""
   let container: HTMLDivElement = document.getElementById(
     "movie-container"
   ) as HTMLDivElement;
   container.innerHTML = "";
 
+  //??
   try {
     movies = await getData(searchText);
 
@@ -33,6 +40,7 @@ export async function handleSubmit() {
   }
 }
 
+//Skapar html
 export const createHtml = (movies: IMovie[], container: HTMLDivElement) => {
   for (let i = 0; i < movies.length; i++) {
     let movie = document.createElement("div");
@@ -51,6 +59,7 @@ export const createHtml = (movies: IMovie[], container: HTMLDivElement) => {
   }
 };
 
+//Error meddelande
 export const displayNoResult = (container: HTMLDivElement) => {
   let noMessage = document.createElement("p");
 
