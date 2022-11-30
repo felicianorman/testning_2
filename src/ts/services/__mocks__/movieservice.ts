@@ -3,28 +3,28 @@ import { IMovie } from "../../models/Movie";
 
 let mockData: IMovie[] = [
   {
-    Title: "Ett",
-    imdbID: "15859",
-    Type: "Horror",
+    Title: "Die hard",
+    imdbID: "tt0095016",
+    Type: "Movie",
     Poster: "url",
-    Year: "1998",
+    Year: "1988",
   },
 
   {
-    Title: "Ett",
-    imdbID: "15859",
-    Type: "Horror",
+    Title: "Home alone",
+    imdbID: "tt0099785",
+    Type: "Movie",
     Poster: "url",
-    Year: "1998",
+    Year: "1990",
   },
 
   {
-    Title: "Ett",
-    imdbID: "15859",
-    Type: "Horror",
+    Title: "Elf",
+    imdbID: "tt0319343",
+    Type: "Movie",
     Poster: "url",
-    Year: "1998",
-  }
+    Year: "2003",
+  },
 ];
 
 export const getData = async() :Promise<IMovie[]> => {

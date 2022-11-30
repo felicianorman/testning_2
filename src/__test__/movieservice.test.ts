@@ -8,47 +8,47 @@ import { getData } from "../ts/services/movieservice";
 // jest.mock("./../ts/services/movieservice.ts")
 let mockData: IMovie[] = [
   {
-    Title: "Ett",
-    imdbID: "15859",
-    Type: "Horror",
+    Title: "Die hard",
+    imdbID: "tt0095016",
+    Type: "Movie",
     Poster: "url",
-    Year: "1998",
+    Year: "1988",
   },
 
   {
-    Title: "Ett",
-    imdbID: "15859",
-    Type: "Horror",
+    Title: "Home alone",
+    imdbID: "tt0099785",
+    Type: "Movie",
     Poster: "url",
-    Year: "1998",
+    Year: "1990",
   },
 
   {
-    Title: "Ett",
-    imdbID: "15859",
-    Type: "Horror",
+    Title: "Elf",
+    imdbID: "tt0319343",
+    Type: "Movie",
     Poster: "url",
-    Year: "1998",
+    Year: "2003",
   },
 ];
 
 jest.mock("axios", () => ({
   get: async () => {
     return new Promise((resolve) => {
-      resolve({ data: mockData });
+      resolve({ data: { Search: mockData }});
     });
   }
 }));
 
 test("should get mock data", async () => {
 //   //Arrange
-//   expect.assertions(2);
+  expect.assertions(2);
   let text: string = "Film";
 
 //   //Act
   let myMovie = await getData(text);
 
 //   //Assert
-  expect(mockData.length).toBe(3);
-//   expect(myMovie[0].Title).toBe("Ett");
+  expect(myMovie[2].Title).toBe("Elf");
+  expect(myMovie[2].Year).toBe("2003");
 });
