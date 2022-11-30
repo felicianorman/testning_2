@@ -43,15 +43,18 @@ export async function handleSubmit() {
 //Skapar html
 export const createHtml = (movies: IMovie[], container: HTMLDivElement) => {
   for (let i = 0; i < movies.length; i++) {
+    //Skapar div, h3 och img
     let movie = document.createElement("div");
     let title = document.createElement("h3");
     let img = document.createElement("img");
 
+    //Hittar vår title, poster och alt
     movie.classList.add("movie");
     title.innerHTML = movies[i].Title;
     img.src = movies[i].Poster;
     img.alt = movies[i].Title;
 
+    //Publicerar i DOM
     movie.appendChild(title);
     movie.appendChild(img);
 

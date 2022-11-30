@@ -35,20 +35,20 @@ let mockData: IMovie[] = [
 jest.mock("axios", () => ({
   get: async () => {
     return new Promise((resolve) => {
-      resolve({ data: { Search: mockData }});
+      resolve({ data: { Search: mockData } });
     });
-  }
+  },
 }));
 
 test("should get mock data", async () => {
-//   //Arrange
+  //Arrange
   expect.assertions(2);
   let text: string = "Film";
 
-//   //Act
+  //Act
   let myMovie = await getData(text);
 
-//   //Assert
+  //Assert
   expect(myMovie[2].Title).toBe("Elf");
   expect(myMovie[2].Year).toBe("2003");
 });
