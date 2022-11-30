@@ -20,7 +20,7 @@ export async function handleSubmit() {
   let searchText = (document.getElementById("searchText") as HTMLInputElement)
     .value;
 
-    //Hämtar div och sätter sedan till ""
+    //Hämtar div och tömmer innan
   let container: HTMLDivElement = document.getElementById(
     "movie-container"
   ) as HTMLDivElement;

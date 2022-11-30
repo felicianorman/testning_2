@@ -3,9 +3,11 @@
  */
 
 import { IMovie } from "../ts/models/Movie";
+import { getData } from "../ts/services/movieservice";
 import * as functions from "./../ts/movieApp";
 
-jest.mock("./../ts/services/movieservice.ts");
+
+// jest.mock("./../ts/services/movieservice.ts");
 
 describe("init", () => {
   test("should find form", () => {
@@ -33,9 +35,10 @@ describe("init", () => {
 });
 
 describe("createhtml", () => {
-  test("should see movie in dom", () => {
+  test("should see movie in dom", async () => {
     //Arrange
-    expect.assertions(1);
+    expect.assertions(3);
+    
     let movies: IMovie[] = [
       {
         Title: "Elf",
@@ -45,6 +48,9 @@ describe("createhtml", () => {
         Type: "Comedy",
       },
     ];
+
+    // let searchText :string = "Text";
+    // let movies :IMovie[] = await getData(searchText);
     document.body.innerHTML = `<div id="movie-container"></div>`;
 
     //Act
@@ -54,7 +60,10 @@ describe("createhtml", () => {
     functions.createHtml(movies, container as HTMLDivElement);
 
     //Assert
-    expect(document.querySelectorAll("div").length).toBeGreaterThan(0);
+    // expect(document.querySelectorAll("div").length).toBeGreaterThan(0);
+    expect(document.querySelectorAll("div.movie").length).toBe(1);
+    expect(document.querySelectorAll("h3").length).toBe(1);
+    expect(document.querySelectorAll("img").length).toBe(1);
 
     //Tömmer html
     document.body.innerHTML = "";
@@ -80,43 +89,11 @@ describe("error message", () => {
   });
 });
 
-// describe("handleSubmit", () => {
-//     // test("should find input", async () => {
-//     //     //Arrange
-//     //     document.body.innerHTML = `<input type="text" id="searchText" placeholder="Skriv titel här" />`;
-//     //     document.body.innerHTML = `<div id="movie-container"></div>`;
+//Funkar inte
+test("should not add text", async () => {
+  document.body.innerHTML = `<div id="movie-container"></div>`;
+  
+  await functions.handleSubmit();
 
-//     //     //Act
-//     //    let input = (document.getElementById("searchText") as HTMLInputElement);
-//     //     await functions.handleSubmit();
-
-//     //     //Assert
-//     //     expect(input).toBe("searchText");
-//     // });
-
-//     test("should add empty string to container", () => {
-//         //Arrange
-//         document.body.innerHTML = `<div id="movie-container"></div>`;
-
-//         //Act
-//         let container = document.getElementById("movie-container") as HTMLDivElement;
-//         container.innerHTML = " ";
-//         functions.handleSubmit();
-
-//         //Assert
-//         expect(container).toContain("");
-
-//     })
-// })
-
-/**
- *   //Hämtar input value för att söka
-  let searchText = (document.getElementById("searchText") as HTMLInputElement)
-    .value;
-
-    //Hämtar div och sätter sedan till ""
-  let container: HTMLDivElement = document.getElementById(
-    "movie-container"
-  ) as HTMLDivElement;
-  container.innerHTML = "";
- */
+  expect(document.getElementById("movie-container")?.innerHTML).toContain("");
+})
