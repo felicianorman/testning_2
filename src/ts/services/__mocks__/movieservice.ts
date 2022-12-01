@@ -1,4 +1,3 @@
-import { IOmdbResponse } from "../../models/IOmdbResponse";
 import { IMovie } from "../../models/Movie";
 
 let mockData: IMovie[] = [

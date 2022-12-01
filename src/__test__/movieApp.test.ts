@@ -3,7 +3,6 @@
  */
 
 import { IMovie } from "../ts/models/Movie";
-import { getData } from "../ts/services/movieservice";
 import * as functions from "./../ts/movieApp";
 
 
@@ -38,7 +37,7 @@ describe("createhtml", () => {
   test("should see movie in dom", async () => {
     //Arrange
     expect.assertions(3);
-    
+
     let movies: IMovie[] = [
       {
         Title: "Elf",
@@ -60,7 +59,6 @@ describe("createhtml", () => {
     functions.createHtml(movies, container as HTMLDivElement);
 
     //Assert
-    // expect(document.querySelectorAll("div").length).toBeGreaterThan(0);
     expect(document.querySelectorAll("div.movie").length).toBe(1);
     expect(document.querySelectorAll("h3").length).toBe(1);
     expect(document.querySelectorAll("img").length).toBe(1);
