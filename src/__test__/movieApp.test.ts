@@ -3,8 +3,8 @@
  */
 
 import { IMovie } from "../ts/models/Movie";
+import { getData } from "../ts/services/movieservice";
 import * as functions from "./../ts/movieApp";
-
 
 // jest.mock("./../ts/services/movieservice.ts");
 
@@ -17,16 +17,15 @@ describe("init", () => {
   </form>`;
 
     let spy = jest.spyOn(functions, "handleSubmit").mockImplementation(
-      () => 
-      new Promise((resolve) => {
-        resolve();
-      })
+      () =>
+        new Promise((resolve) => {
+          resolve();
+        })
     );
 
     //Act
     functions.init();
     (document.getElementById("searchForm") as HTMLFormElement).submit();
-    
 
     //Assert
     expect(spy).toHaveBeenCalled();
@@ -47,9 +46,6 @@ describe("createhtml", () => {
         Type: "Comedy",
       },
     ];
-
-    // let searchText :string = "Text";
-    // let movies :IMovie[] = await getData(searchText);
     document.body.innerHTML = `<div id="movie-container"></div>`;
 
     //Act
@@ -87,11 +83,15 @@ describe("error message", () => {
   });
 });
 
-//Funkar inte
-test("should not add text", async () => {
-  document.body.innerHTML = `<div id="movie-container"></div>`;
-  
-  await functions.handleSubmit();
+test("handleSubmit", async () => {
+  //Arrange
+  document.body.innerHTML = `<form id="searchForm">
+ <input type="text" id="searchText" placeholder="Skriv titel här" />
+ <button type="submit" id="search">Sök</button>
+</form>
+<div id="movie-container"></div>`;
 
-  expect(document.getElementById("movie-container")?.innerHTML).toContain("");
-})
+await functions.handleSubmit();
+
+expect(document.querySelectorAll("div").length).toBe(1);
+});

@@ -51,4 +51,6 @@ test("should get mock data", async () => {
   //Assert
   expect(myMovie[2].Title).toBe("Elf");
   expect(myMovie[2].Year).toBe("2003");
+
 });
+
