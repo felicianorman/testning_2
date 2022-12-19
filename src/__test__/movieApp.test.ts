@@ -6,7 +6,7 @@ import { IMovie } from "../ts/models/Movie";
 import { getData } from "../ts/services/movieservice";
 import * as functions from "./../ts/movieApp";
 
-// jest.mock("./../ts/services/movieservice.ts");
+jest.mock("./../ts/services/movieservice.ts");
 
 describe("init", () => {
   test("should find form", () => {
